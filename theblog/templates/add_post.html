@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Create New {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+  {% if user.is_authenticated %}
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Create a New Blog Post</h4>
+      </div>
+      <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.media }} <!-- for ckeditor -->
+          {{ form.as_p }} <!-- as_p= gives a default form provided by django with <p> tags. we can degign it in forms.py -->
+          <button type="submit" class="btn btn-success mt-2">Post</button>
+        </form>
+      </div>
+    </div>
+    <br>
+
+  {% else %}
+    <div class="alert alert-warning text-center">
+      <strong>You need to log in to create a post.</strong><br>
+      <a href="{% url 'login' %}" class="btn btn-outline-primary mt-2">Login Here</a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

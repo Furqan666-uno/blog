@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Blog {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  {% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+      <h2 class="mb-4 text-center">Update Blog Post</h2>
+
+      <div class="card shadow-sm p-4">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.media }}
+          {{ form.as_p }}
+          <div class="text-end">
+            <button class="btn btn-primary" type="submit">Update Post</button>
+          </div>
+        </form>
+      </div>
+
+    {% else %}
+      <div class="alert alert-danger mt-4">
+        <strong>Access Denied:</strong> You are not authorized to update this post.
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="alert alert-warning mt-4">
+      <p>You need to log in to access this page.</p>
+      <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}

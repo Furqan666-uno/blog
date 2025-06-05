@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Category {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+  {% if user.is_authenticated %}
+    <div class="card shadow">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Add a New Category</h4>
+      </div>
+      <div class="card-body">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-success mt-3">Add</button>
+        </form>
+      </div>
+    </div>
+
+  {% else %}
+    <div class="alert alert-warning text-center">
+      <strong>You need to log in to add a category.</strong><br>
+      <a href="{% url 'login' %}" class="btn btn-outline-primary mt-2">Login Here</a>
+    </div>
+  {% endif %}
+  <br><br><br><br><br><br><br><br>
+
+</div>
+{% endblock %}

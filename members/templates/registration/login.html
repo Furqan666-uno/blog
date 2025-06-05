@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 400px; margin-top: 60px;">
+  <div class="card shadow-sm p-4">
+    <h2 class="text-center mb-4">Login</h2>
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      {{ form.as_p }} <!-- as_p= gives a default form provided by django with <p> tags. we can degign it in forms.py -->
+
+      <div class="d-grid mt-3">
+        <button class="btn btn-primary btn-block" type="submit">Login</button>
+      </div>
+    </form>
+    <br><br><br><br><br>
+  </div>
+</div>
+{% endblock %}

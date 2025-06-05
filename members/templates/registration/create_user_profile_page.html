@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Create New Profile Page {% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="container mt-5" style="max-width: 700px;">
+  <h2 class="text-center mb-4">👤 Create Your Profile</h2>
+
+  <div class="card shadow-sm p-4">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.media }} <!-- for ckeditor -->
+      {{ form.as_p }} <!-- as_p= gives a default form provided by django with <p> tags. we can degign it in forms.py -->
+      
+      <div class="text-end">
+        <button class="btn btn-success" type="submit">Create Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% else %}
+<div class="container mt-5">
+  <div class="alert alert-warning text-center" role="alert">
+    ⚠️ You need to log in to create a profile.<br>
+    <a href="{% url 'login' %}" class="btn btn-primary mt-3">Login</a>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
